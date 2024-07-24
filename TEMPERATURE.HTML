@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEMPERATURE CONVERTER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        body{
+            font-family: 'Montserrat', sans-serif;
+            background-image: url(wallpaperflare.com_wallpaper\ \(6\).jpg);
+            color: #ffffff;
+        }
+        
+        .main{
+            height: 95vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container{
+            border: 1px solid #eee;
+            width: 50%;
+            padding-left: 40px;
+            padding-bottom: 40px;
+            border-radius: 30px;
+            background-color: rgba(255, 255, 255, .05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group h1{
+            color: #007bff;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input{
+            color: #ffffff;
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            border: 1px solid #a0a0a0ee;
+            background: transparent;
+        }
+        select, option {
+            width: 80%;
+            color: #000;
+            padding: 10px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            border: 1px solid #a0a0a0ee;
+            background: transparent;
+        }
+
+        select{
+            color: #ffffff;
+        }
+        
+        input:placeholder-shown{
+            font-family: 'Montserrat', sans-serif;
+            color: #ffffff;
+
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #result {
+            margin-top: 8px;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+                <h1 style="font-weight: 800; text-align: center; font-size: 50px;">Temperature Converter</h1>
+                <div class="form-group">
+                    <label for="temperature">Temperature</label>
+                        <input type="number" id="temperature" placeholder="Enter Temperature">
+                        <br><br>
+                    
+                        <label for="fromUnit">From:</label>
+                        <select id="fromUnit">
+                            <option value="C">Celcious</option>
+                            <option value="F">Fahrenheit</option>
+                            <option value="K">Kelvin</option>
+                        </select>
+                        <br><br>
+                    
+                        <label for="toUnit">To:</label>
+                        <select id="toUnit">
+                            <option value="C">Celcious</option>
+                            <option value="F">Fahrenheit</option>
+                            <option value="K">Kelvin</option>
+                        </select>
+                        <br><br>
+
+                        <button onclick="convert()">Convert</button>
+                        <br><br>
+                       
+                        <label for="result">Result:</label>
+                        <input type="text" id="result" readonly>
+                </div>
+                
+         </div>
+    </div> 
+    
+    <script>
+        
+        function convert(){
+            var fromUnit = document.getElementById('fromUnit').value;
+            var toUnit = document.getElementById('toUnit').value;
+            var temperature = parseFloat(document.getElementById('temperature').value);
+
+            var converttedValue;
+            var resultUnit;
+
+            switch (fromUnit){
+                case 'C':
+                    if (toUnit === 'F'){
+                        convertedValue = (temperature * 9/5) +32;
+                        resultUnit = 'F';
+                    } else if (toUnit === 'K'){
+                        convertedValue = temperature + 273.15;
+                        resultUnit = 'K';
+                    }else{
+                        convertedValue = temperature;
+                        resultUnit = 'C';
+                    }
+                    break;
+
+                    case 'F':
+                    if (toUnit === 'C'){
+                        convertedValue = (temperature -32) * 5/9;
+                        resultUnit = 'C';
+                    } else if (toUnit === 'K'){
+                        convertedValue = (temperature -32) * 5/9 + 273.15;
+                        resultUnit = 'K';
+                    }else{
+                        convertedValue = temperature;
+                        resultUnit = 'F';
+                    }
+                    break;
+
+                    case 'K':
+                    if (toUnit === 'C'){
+                        convertedValue = temperature - 273.15;
+                        resultUnit = 'C';
+                    } else if (toUnit === 'K'){
+                        convertedValue = (temperature - 273.15) * 9/5 +32;
+                        resultUnit = 'K';
+                    }else{
+                        convertedValue = temperature;
+                        resultUnit = 'K';
+                    }
+                    break;
+            }
+
+            document.getElementById('result').value = convertedValue.toFixed(2) + ' ' + resultUnit;
+            
+        }
+    </script>
+</body>
+</html>
